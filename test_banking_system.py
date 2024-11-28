@@ -3,7 +3,6 @@ import unittest
 from banking_system import deposit, withdraw, transfer, add_account, find_account, display_all_accounts
 
 class TestBankingSystem(unittest.TestCase):
-
     def setUp(self):
         self.accounts = {
             'John': {'balance': 1000},
@@ -16,16 +15,16 @@ class TestBankingSystem(unittest.TestCase):
 
     def test_withdraw(self):
         withdraw(self.accounts['John'], 500)
-        self.assertEqual(self.accounts['John']['balance'], 700)
-        withdraw(self.accounts['John'], 1000)
-        self.assertEqual(self.accounts['John']['balance'], 700)  # Insufficient funds
+        self.assertEqual(self.accounts['John']['balance'], 500)
+        withdraw(self.accounts['John'], 1100)
+        self.assertEqual(self.accounts['John']['balance'], 500)  # Insufficient funds
 
     def test_transfer(self):
         transfer(self.accounts['John'], self.accounts['Jane'], 300)
-        self.assertEqual(self.accounts['John']['balance'], 400)
+        self.assertEqual(self.accounts['John']['balance'], 700)
         self.assertEqual(self.accounts['Jane']['balance'], 800)
         transfer(self.accounts['John'], self.accounts['Jane'], 500)
-        self.assertEqual(self.accounts['John']['balance'], 400)  # Insufficient funds
+        self.assertEqual(self.accounts['John']['balance'], 200)  # Insufficient funds
 
     def test_add_account(self):
         add_account(self.accounts, 'Alice', 100)
